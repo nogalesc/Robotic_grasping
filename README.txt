@@ -3,7 +3,12 @@ Editor: Chris Nogales
 This is the original README file from the svmlight package that Ms. Jiang provided, 
 she refers to it as the LimClassifier. 
 
-How I run it: $ rosrun svmlight extract_pc_features ~data/00 100
+How I run it: 
+$ roscd ~/electric_workspace/sandbox/svmlight/
+$ rosrun svmlight extract_pc_features ~/data_for_training 424 
+
+-> I use 424 because only 50% of the data is used for training
+-> The folder contains 900 samples but we skip half
 
 For the second step, you have to use the executable called svm_learn at ~/experimentCode/svm_light/svm_learn.
 This executable comes from a free-to-use library (svmlight.joachims.org) and it will create a model file.
