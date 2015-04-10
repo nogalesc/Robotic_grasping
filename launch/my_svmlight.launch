@@ -1,0 +1,8 @@
+<launch>
+   <!-- Start svmlight to extract features from pt clouds and images-->
+   <node name="extract_pc_features" pkg="svmlight" type='extract_pc_features'>
+   	 <!--rosrun my_package my_node.py-->
+   	 <!--rosrun svmlight extract_pc_features ~/data 600-->
+
+   </node>
+</launch>

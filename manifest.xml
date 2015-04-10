@@ -1,0 +1,20 @@
+<package>
+  <description brief="svmlight">
+
+     svmlight
+
+  </description>
+  <author></author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/svmlight</url>
+
+  <depend package="roscpp"/>
+  <depend package="opencv2"/>
+  <depend package="pcl"/>
+  <depend package="sensor_msgs"/>
+  <depend package="stereo_msgs"/>
+
+</package>
+
+
