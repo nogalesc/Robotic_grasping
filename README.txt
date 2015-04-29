@@ -69,6 +69,9 @@ The output of this program is stored in the working directory and is called sr_%
 ---------------------------------------------------------------
 ------------HOW TO RANK RECTANGLES USING MODEL-----------------
 ---------------------------------------------------------------
+//IMPORTANT: I enabled a debug line that set the number of bins to 16 instead
+of using 32. Using 32 caused memory problems!!!! Somehow it worked.
+
 $./bin/rank ~/RANK_IN/pcd0199r.png ~/RANK_IN/pcdb0013r.png ~/RANK_IN/pcd0199.txt ~/RANK_IN/model ~/RANK_OUT/
 
 ---------------------------------------------------------------

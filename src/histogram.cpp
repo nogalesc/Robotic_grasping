@@ -1,5 +1,6 @@
 #include "histogram.h"
 #include <iostream>
+#include <new>          // std::bad_alloc
 
 // Gets the value of the h->img at row r, col c, bin k
 inline int get(const IntegralHistogram *h, int r, int c, int k) {
@@ -32,8 +33,8 @@ void releaseIntegralHistogram(IntegralHistogram **hist) {
 // mat must be in CV32FC1
 // O( width * height * nBins ) time
 IntegralHistogram *calcIntegralHistogram(const CvMat *mat, int nBins, const float *ranges, const CvMat *mask) {
-    //cout << "Before mem take " << endl;
-   // nBins = 16; // hard coded to fix bug
+    cout << "Before mem take " << endl;
+    nBins = 16; // hard coded to fix bug //I enable this to see what happens
 
     CvScalar s;
     IntegralHistogram *h = new IntegralHistogram();
@@ -42,18 +43,25 @@ IntegralHistogram *calcIntegralHistogram(const CvMat *mat, int nBins, const floa
     h->nBins = nBins;
     
 
-    //int memCost = sizeof(IntegralHistogram) + h->nBins+1 + h->h * h->w * h->nBins;
-	//cout << "histo: " << sizeof(IntegralHistogram);
-//	cout << " bins: " << (h->nBins+1);
-//	cout << " height: " << h->h;
-//	cout << " width: " << h->w;
-    //cout << "mem cost " << memCost << endl;
-    h->ranges = new float[h->nBins+1];
-    memcpy(h->ranges,ranges,sizeof(float)*(h->nBins+1));
-    h->img = new float[ h->h * h->w * h->nBins ];
-    memset(h->img, 0, (h->h * h->w * h->nBins) * sizeof (float));
-    //cout << "After mem take " << endl;
-    
+//	
+	int memCost = sizeof(IntegralHistogram) + h->nBins+1 + h->h * h->w * h->nBins;
+        cout << "histo: " << sizeof(IntegralHistogram);//enable this debug line
+	cout << " bins: " << (h->nBins+1);//enable this debug line
+	cout << " height: " << h->h;//enable this debug line
+	cout << " width: " << h->w;//enable this debug line
+    	cout << "mem cost " << memCost << endl; //enable this debug line
+//
+//    try { //added bad alloc catch
+    	h->ranges = new float[h->nBins+1];
+    	memcpy(h->ranges,ranges,sizeof(float)*(h->nBins+1));
+    	h->img = new float[ h->h * h->w * h->nBins ];
+    	memset(h->img, 0, (h->h * h->w * h->nBins) * sizeof (float));
+    	cout << "After mem take " << endl;     //enable this debug line
+/*    }
+    catch (const std::bad_alloc&) {
+   	return -1;
+    } 
+*/
     float centers[h->nBins];
     for (int i=0;i<h->nBins;i++) {
         centers[i] = (ranges[i] + ranges[i+1] ) / 2.0;
@@ -270,7 +278,7 @@ void getHistogramFeatureVectorDirect(const CvMat *mat, int nBins, float binWidth
   if (!useMean || minVal < 0) minVal = 0.0;
   maxVal = (maxVal < minVal ? minVal + binWidth : maxVal);
   int nBinsTotal = (int)((maxVal-minVal)/binWidth);
-	//~ printf("\n\nMIN: %f, MAX: %f, nBins: %d\n\n",minVal, maxVal, nBinsTotal);
+	//printf("\n\nMIN: %f, MAX: %f, nBins: %d\n\n",minVal, maxVal, nBinsTotal); //enabled this debug line
   float ranges[nBinsTotal+1];
   ranges[0] = minVal; ranges[nBinsTotal] = maxVal;
   for (int i=1;i<nBinsTotal;i++) {
