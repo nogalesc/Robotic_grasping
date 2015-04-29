@@ -69,6 +69,9 @@ The output of this program is stored in the working directory and is called sr_%
 ---------------------------------------------------------------
 ------------HOW TO RANK RECTANGLES USING MODEL-----------------
 ---------------------------------------------------------------
-$./bin/rank ./pcd0199r.png ./pcdb0013r.png ./pcd0199.txt model /tmp/scm42/
+$./bin/rank ~/RANK_IN/pcd0199r.png ~/RANK_IN/pcdb0013r.png ~/RANK_IN/pcd0199.txt ~/RANK_IN/model ~/RANK_OUT/
+
+---------------------------------------------------------------
+$./bin/rank ~/RANK_IN/pcd0199r.png ~/RANK_IN/pcdb0013r.png ~/RANK_IN/pcd0199.txt model /tmp/scm42/
 
 
