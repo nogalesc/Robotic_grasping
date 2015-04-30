@@ -93,7 +93,7 @@ int main(int argc, char *argv[]) {
 		BG_SAVE_FILENAME = "";
 	    }
 		//~ return 0;
-		vector<ScoredRect> scoredRects = test(imgFile.c_str(), bgFile.c_str(), pcdFile.c_str(), model);
+		vector<ScoredRect> scoredRects = test(imgFile.c_str(), bgFile.c_str(), pcdFile.c_str(), model);  //VERY VERY IMPORTANT CHRIS!
 	
 		// Save the rectangles
 		if (SAVE_RECTS) {
@@ -121,13 +121,18 @@ int main(int argc, char *argv[]) {
 			for (unsigned int g=0,j=0;j<savePoints.size();j++) {
 				for (; g < savePoints[j] && g < vRect.size() && g < scoredRects.size(); g++) {
 					ScoredRect sr = scoredRects[g];
-					//printf("%.4g %g %g %g %g %g\n", sr.score, sr.x, sr.y, sr.w, sr.h, sr.t);
+//					printf("%.4g %g %g %g %g %g\n", sr.score, sr.x, sr.y, sr.w, sr.h, sr.t); //Do not enable this printout
+/*  /home/shockwave/electric_workspace/sandbox/svmlight/src/rank_main.cpp:124: error: ‘struct ScoredRect’ has no member named ‘x’
+  /home/shockwave/electric_workspace/sandbox/svmlight/src/rank_main.cpp:124: error: ‘struct ScoredRect’ has no member named ‘y’
+  /home/shockwave/electric_workspace/sandbox/svmlight/src/rank_main.cpp:124: error: ‘struct ScoredRect’ has no member named ‘w’
+  /home/shockwave/electric_workspace/sandbox/svmlight/src/rank_main.cpp:124: error: ‘struct ScoredRect’ has no member named ‘h’
+  /home/shockwave/electric_workspace/sandbox/svmlight/src/rank_main.cpp:124: error: ‘struct ScoredRect’ has no member named ‘t’ */
 					vector<double> x = sr.rect.x;
 					vector<double> y = sr.rect.y;
 					for (unsigned int k = 0;k < x.size();k++) {
 						x[k] += CROP_RECT.x; y[k] += CROP_RECT.y;
 					}
-					//~ printf("%.4g", sr.score);
+					//~ printf("%.4g", sr.score); //enable this print out
 					CvPoint  box[] = {x[0], y[0],  x[1], y[1],  x[2], y[2],  x[3], y[3]};
 					CvPoint* boxArr[1] = {box};
 					int      nCurvePts[1] = {4};
