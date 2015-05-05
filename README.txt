@@ -9,6 +9,9 @@ How I run it:
 $ roscd ~/electric_workspace/sandbox/svmlight/
 $ rosrun svmlight extract_pc_features ~/data_for_training 424 
 
+If you make changes to src files:
+$ rosmake svmlight
+
 -> I use 424 because only 50% of the data is used for training
 -> The folder contains 900 samples but we skip half
 
