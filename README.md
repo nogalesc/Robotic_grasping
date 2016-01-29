@@ -1,6 +1,7 @@
 # Robotic_grasping: data
 
 The data used to train the SVM can be found here: http://pr.cs.cornell.edu/grasping/rect_data/data.php
+Code by Yun Jiang "Learning to Grasp Novel Objects": http://pr.cs.cornell.edu/grasping/
 
 *They are missing data 00 and the code cannot run without it so I renamed files in 10*
 
@@ -18,4 +19,6 @@ Place only raw data in ~/data_for_training/
 $ rosrun vsmlight extract_pc_features $PATH_TO_DATA/ #
 
 *# = How many samples to train on, I set it to half the max available because it SKIPS samples! 
+
+
 
